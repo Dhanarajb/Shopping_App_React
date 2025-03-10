@@ -1,52 +1,49 @@
-/* Cart.css */
-
+/* Cart Page */
 .cart-page {
     padding: 20px;
-    min-height: 70vh;
+    max-width: 800px;
+    margin: 0 auto;
     background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 80px;
 }
 
 .cart-title {
-    font-size: 28px;
+    font-size: 2rem;
     margin-bottom: 20px;
-    text-align: center;
     color: #333;
 }
 
 .empty-cart-message {
-    font-size: 18px;
+    font-size: 1.2rem;
+    color: #666;
     text-align: center;
-    color: #777;
+    margin-top: 50px;
 }
 
+/* Cart Items */
 .cart-items-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .cart-item {
     display: flex;
     align-items: center;
-    padding: 15px;
-    border-radius: 8px;
     background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.cart-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .cart-item-image {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    margin-right: 15px;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
     border-radius: 8px;
+    margin-right: 20px;
 }
 
 .cart-item-details {
@@ -54,56 +51,48 @@
 }
 
 .cart-item-title {
-    font-size: 18px;
-    margin: 5px 0;
+    font-size: 1.2rem;
     color: #333;
 }
 
 .cart-item-price {
-    font-size: 16px;
-    color: #007bff;
+    font-size: 1rem;
+    color: #888;
     margin: 5px 0;
 }
 
 .remove-btn {
-    padding: 8px 12px;
-    border: none;
     background-color: #ff4d4d;
     color: white;
+    border: none;
+    padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    margin-top: 10px;
+    transition: background-color 0.2s;
 }
 
 .remove-btn:hover {
-    background-color: #d93636;
+    background-color: #e60000;
 }
 
+/* Cart Total */
 .cart-total {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.cart-total h3 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
+    margin-top: 20px;
+    text-align: right;
 }
 
 .checkout-btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    background-color: #007bff;
+    background-color: #4caf50;
     color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.2s;
 }
 
 .checkout-btn:hover {
-    background-color: #0056b3;
+    background-color: #45a049;
 }
 
 /* Payment Gateway Modal */
@@ -111,9 +100,9 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -124,47 +113,103 @@
     background-color: white;
     padding: 30px;
     border-radius: 10px;
-    max-width: 400px;
-    width: 90%;
+    width: 300px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
+.payment-modal h2 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+/* Payment Input Styles */
 .payment-input {
-    width: 100%;
     padding: 10px;
-    margin: 10px 0;
     border: 1px solid #ddd;
     border-radius: 5px;
+    outline: none;
+    width: 100%;
+    font-size: 1rem;
+    transition: border-color 0.2s;
 }
 
+.payment-input:focus {
+    border-color: #4caf50;
+}
+
+.input-error {
+    border-color: #ff4d4d;
+}
+
+.error-message {
+    color: #ff4d4d;
+    font-size: 0.9rem;
+}
+
+/* Payment Buttons */
 .confirm-btn {
-    width: 100%;
-    background-color: #28a745;
+    background-color: #4caf50;
     color: white;
     border: none;
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.3s;
+    transition: background-color 0.2s;
 }
 
 .confirm-btn:hover {
-    background-color: #218838;
+    background-color: #45a049;
 }
 
 .cancel-btn {
-    width: 100%;
-    background-color: #6c757d;
+    background-color: #ff4d4d;
     color: white;
     border: none;
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.3s;
+    transition: background-color 0.2s;
 }
 
 .cancel-btn:hover {
-    background-color: #5a6268;
+    background-color: #e60000;
+}
+
+/* Success Animation */
+.payment-success {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    z-index: 1000;
+}
+
+.payment-success h2 {
+    margin-top: 20px;
+    font-size: 2rem;
+    color: #4caf50;
+    animation: successFade 1s ease-in-out;
+}
+
+@keyframes successFade {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

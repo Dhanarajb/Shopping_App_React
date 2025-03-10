@@ -1,9 +1,16 @@
-// Cart.js
 import React, { useState } from 'react';
 import './Cart.css';
+import { BsCheckCircle } from 'react-icons/bs';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const Cart = ({ cartItems, handleRemoveFromCart }) => {
+const Cart = ({ cartItems, handleRemoveFromCart, handleClearCart }) => {
     const [showPaymentGateway, setShowPaymentGateway] = useState(false);
+    const [paymentSuccess, setPaymentSuccess] = useState(false);
+    const [cardNumber, setCardNumber] = useState('');
+    const [expiryDate, setExpiryDate] = useState('');
+    const [cvv, setCvv] = useState('');
+    const [errors, setErrors] = useState({});
+
     const totalAmount = cartItems.reduce((total, item) => total + item.price, 0);
 
     const handleProceedToCheckout = () => {
@@ -11,8 +18,25 @@ const Cart = ({ cartItems, handleRemoveFromCart }) => {
     };
 
     const handlePayment = () => {
-        alert('Payment Successful! Thank you for your purchase.');
-        setShowPaymentGateway(false);
+        const newErrors = {};
+        if (!/^[0-9]{16}$/.test(cardNumber)) newErrors.cardNumber = 'Invalid Card Number';
+        if (!/^(0[1-9]|1[0-2])\/([0-9]{2})$/.test(expiryDate)) newErrors.expiryDate = 'Invalid Expiry Date';
+        if (!/^[0-9]{3}$/.test(cvv)) newErrors.cvv = 'Invalid CVV';
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+        } else {
+            setErrors({});
+            setPaymentSuccess(true);
+            setTimeout(() => {
+                setPaymentSuccess(false);
+                setShowPaymentGateway(false);
+                setCardNumber('');
+                setExpiryDate('');
+                setCvv('');
+                handleClearCart();
+            }, 2000);
+        }
     };
 
     return (
@@ -48,15 +72,40 @@ const Cart = ({ cartItems, handleRemoveFromCart }) => {
                 </>
             )}
 
-            {/* Dummy Payment Gateway Modal */}
             {showPaymentGateway && (
                 <div className="payment-gateway">
                     <div className="payment-modal">
                         <h2>Payment Gateway</h2>
                         <p>Total Amount: ${totalAmount.toFixed(2)}</p>
-                        <input type="text" placeholder="Card Number" className="payment-input" />
-                        <input type="text" placeholder="Expiry Date" className="payment-input" />
-                        <input type="text" placeholder="CVV" className="payment-input" />
+                        <input
+                            type="text"
+                            placeholder="Card Number"
+                            maxLength="16"
+                            className={`payment-input ${errors.cardNumber ? 'input-error' : ''}`}
+                            value={cardNumber}
+                            onChange={(e) => setCardNumber(e.target.value)}
+                        />
+                        {errors.cardNumber && <p className="error-message">{errors.cardNumber}</p>}
+
+                        <input
+                            type="text"
+                            placeholder="Expiry Date (MM/YY)"
+                            className={`payment-input ${errors.expiryDate ? 'input-error' : ''}`}
+                            value={expiryDate}
+                            onChange={(e) => setExpiryDate(e.target.value)}
+                        />
+                        {errors.expiryDate && <p className="error-message">{errors.expiryDate}</p>}
+
+                        <input
+                            type="text"
+                            placeholder="CVV"
+                            maxLength="3"
+                            className={`payment-input ${errors.cvv ? 'input-error' : ''}`}
+                            value={cvv}
+                            onChange={(e) => setCvv(e.target.value)}
+                        />
+                        {errors.cvv && <p className="error-message">{errors.cvv}</p>}
+
                         <button className="confirm-btn" onClick={handlePayment}>
                             Confirm Payment
                         </button>
@@ -69,6 +118,21 @@ const Cart = ({ cartItems, handleRemoveFromCart }) => {
                     </div>
                 </div>
             )}
+
+            <AnimatePresence>
+                {paymentSuccess && (
+                    <motion.div
+                        className="payment-success"
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.5 }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        <BsCheckCircle size={100} color="green" />
+                        <h2>Payment Successful!</h2>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };

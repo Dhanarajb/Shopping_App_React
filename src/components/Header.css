@@ -1,0 +1,50 @@
+/* Header.css */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    height: 60px;
+    /* Fixed height for consistency */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header a {
+    color: white;
+    margin-right: 15px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.header-logo {
+    font-size: 1.8rem;
+    color: white;
+}
+
+.user-name {
+    margin-right: 15px;
+    font-weight: 500;
+}
+
+.logout-btn {
+    background-color: #ff4d4f;
+    border: none;
+    padding: 8px 12px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 14px;
+}
+
+.logout-btn:hover {
+    background-color: #d9363e;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}

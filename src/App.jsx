@@ -61,13 +61,18 @@ const App = () => {
             <Route
               path="*"
               element={
-                <div className="login-page">
-                  <h2>Welcome! Please sign in to continue</h2>
-                  <GoogleLogin
-                    onSuccess={handleLoginSuccess}
-                    onError={() => console.log('Login Failed')}
-                  />
+                <div className="login-container">
+                  <div className="login-card">
+                    <h2>Welcome! Please sign in to continue</h2>
+                    <div className="google-login-wrapper">
+                      <GoogleLogin
+                        onSuccess={handleLoginSuccess}
+                        onError={() => console.log('Login Failed')}
+                      />
+                    </div>
+                  </div>
                 </div>
+
               }
             />
           )}

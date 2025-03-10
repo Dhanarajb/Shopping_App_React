@@ -11,11 +11,11 @@ const Header = ({ isLoggedIn, handleLogout }) => {
             </h1>
             <nav>
                 {isLoggedIn && (
-                    <>
+                    <div className='nav-links'>
                         <Link to="/">Home</Link>
                         <Link to="/cart">Cart</Link>
                         <button className="logout-btn" onClick={handleLogout}>Logout</button>
-                    </>
+                    </div>
                 )}
             </nav>
         </header>

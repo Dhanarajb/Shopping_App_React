@@ -1,13 +1,22 @@
 /* Header.css */
 .header {
+    position: fixed;
+    /* Make the header fixed */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    /* Ensure the header is always on top */
+
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     padding: 10px 20px;
     background-color: #333;
     color: white;
     height: 60px;
-    /* Fixed height for consistency */
+
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -16,6 +25,11 @@
     margin-right: 15px;
     text-decoration: none;
     font-weight: 500;
+    transition: color 0.3s;
+}
+
+.header a:hover {
+    color: #ddd;
 }
 
 .header-logo {
@@ -47,4 +61,14 @@ nav {
     display: flex;
     align-items: center;
     gap: 15px;
+}
+
+/* Add top padding to the main content to avoid overlap */
+.main-content {
+    padding-top: 70px;
+    /* Height of the header + some margin */
+}
+
+.nav-links {
+    margin-right: 30px;
 }
